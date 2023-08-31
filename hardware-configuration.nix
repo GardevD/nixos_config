@@ -13,15 +13,31 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/63c4f7ca-b2f0-4235-8da4-dedac1d9680e";
-      fsType = "ext4";
+  fileSystems = 
+  {"/" =
+    { 
+      neededForBoot = true;
+      device = "rpool/root";
+      fsType = "zfs";
     };
+       "/nix" = {
+         neededForBoot = true;
+         device = "rpool/nix";
+         fsType = "zfs";
+      };
+      "/persistence" = {
+         neededForBoot = true;
+         device = "rpool/persistence";
+         fsType = "zfs";
+      };
 
-  fileSystems."/boot" =
+    "/boot" =
     { device = "/dev/disk/by-uuid/2365-1045";
       fsType = "vfat";
     };
+  };
+  # generated with `head -c 8 /etc/machine-id`
+  networking.hostId = "ef7eb90c";
 
   swapDevices =
     [ { device = "/dev/disk/by-uuid/afcd35de-f896-4a50-8ce0-009cbbd74d6b"; }

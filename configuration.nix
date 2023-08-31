@@ -42,6 +42,7 @@
     LC_TIME = "hu_HU.UTF-8";
   };
 
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
@@ -80,7 +81,7 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-
+  boot.supportedFilesystems = [ "zfs" ];
   programs.steam.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dani = {
@@ -89,12 +90,9 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       steam
-      vivaldi
       vscodium
       discord
-      vim
       keepassxc
-      git
     #  thunderbird
     ];
   };
@@ -113,7 +111,9 @@
 
 
   environment.systemPackages = with pkgs; [
-  
+      vim
+      git
+      vivaldi
     ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
