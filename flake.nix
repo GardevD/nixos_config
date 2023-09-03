@@ -14,11 +14,11 @@ inputs = {
       nix-matlab.overlay
     ];
   in {
-    nixosConfigurations =( 
-      dani_laptop = nixpkgs.lib.nixosSystem {
+    nixosConfigurations = (
+      HOSTNAME = nixpkgs.lib.nixosSystem {
         modules = [ (import ./configuration.nix flake-overlays) ]
       };)
     };
   };
 };
-
+}

@@ -94,6 +94,7 @@
       vscode
       discord
       keepassxc
+      dotnet-sdk_8
     #  thunderbird
     ];
   };
