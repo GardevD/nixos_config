@@ -52,7 +52,7 @@
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "hu";
+    layout = "hu,dk";
     xkbVariant = "";
   };
 
