@@ -54,6 +54,7 @@
   services.xserver = {
     layout = "hu,dk";
     xkbVariant = "";
+    xkbOptions = "grp:win_space_toggle";
   };
 
   # Configure console keymap
