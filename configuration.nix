@@ -53,12 +53,12 @@
   # Configure keymap in X11
   services.xserver = {
     layout = "hu,dk";
-    xkbVariant = "";
-    xkbOptions = "grp:win_space_toggle";
+    xkbVariant = "nodeadkeys";
+    xkbOptions = "grp:alt_shift_toggle";
   };
 
   # Configure console keymap
-  console.keyMap = "hu101";
+  console.keyMap = "dk";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -85,9 +85,12 @@
   boot.supportedFilesystems = [ "zfs" ];
   programs.steam.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.mutableUsers = false;
   users.users.dani = {
     isNormalUser = true;
     description = "Gardev Dániel";
+    initialHashedPassword = "$y$j9T$eB1piEmD1KMDq6r1ShZXR/$1vFOtpbzwEWD.xPikpLnyacVSLHmU2Sa6vbrvgTt84/";
+    hashedPassword = "$y$j9T$eB1piEmD1KMDq6r1ShZXR/$1vFOtpbzwEWD.xPikpLnyacVSLHmU2Sa6vbrvgTt84/";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       steam
@@ -96,6 +99,7 @@
       discord
       keepassxc
       dotnet-sdk_8
+      python3
     #  thunderbird
     ];
   };
