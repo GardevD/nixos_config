@@ -86,6 +86,18 @@
   programs.steam.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = false;
+
+  nixpkgs.overlays = let
+    nix-matlab = import (builtins.fetchTarball "https://gitlab.com/doronbehar/nix-matlab/-/archive/master/nix-matlab-master.tar.gz");
+  in [
+    nix-matlab.overlay
+    (
+      final: prev: {
+        # Your own overlays...
+      }
+    )
+  ];
+
   users.users.dani = {
     isNormalUser = true;
     description = "Gardev Dániel";
@@ -93,22 +105,31 @@
     hashedPassword = "$y$j9T$eB1piEmD1KMDq6r1ShZXR/$1vFOtpbzwEWD.xPikpLnyacVSLHmU2Sa6vbrvgTt84/";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
+      anki
+      openjdk17
       steam
       vscodium
       vscode
       discord
       keepassxc
       dotnet-sdk_8
-      python3
+      blender
+      matlab
+      krita
+      imagemagick
+      adoptopenjdk-icedtea-web #javaws is needed for exam monitor SDU
     #  thunderbird
     ];
   };
+
 
   # Allow unfree packages
   nixpkgs.config={
 	allowUnfree = true;
 	allowUnfreePredicate = (_: true);
   };
+
+
 
   nix.settings.experimental-features = [ "nix-command" "flakes"];
   # List packages installed in system profile. To search, run:
@@ -120,6 +141,7 @@
   environment.systemPackages = with pkgs; [
       vim
       git
+      python3
       vivaldi
     ];
   # Some programs need SUID wrappers, can be configured further or are
