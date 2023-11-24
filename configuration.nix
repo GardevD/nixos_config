@@ -115,6 +115,7 @@
       dotnet-sdk_8
       blender
       matlab
+      kicad
       krita
       imagemagick
       adoptopenjdk-icedtea-web #javaws is needed for exam monitor SDU
