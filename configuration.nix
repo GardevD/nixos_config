@@ -1,6 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
+flake-overlays:
 
 { config, pkgs, ... }:
 
@@ -87,16 +88,13 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = false;
 
-  #nixpkgs.overlays = let
-  #  nix-matlab = import (builtins.fetchTarball "https://gitlab.com/doronbehar/nix-matlab/-/archive/master/nix-matlab-master.tar.gz");
-  #in [
-  #  nix-matlab.overlay
-  #  (
-  #    final: prev: {
-  #      # Your own overlays...
-  #    }
-  #  )
-  #];
+  nixpkgs.overlays = [
+    (
+      final: prev: {
+        # Your own overlays...
+      }
+    )
+  ] ++ flake-overlays;
 
   users.users.dani = {
     isNormalUser = true;
@@ -114,7 +112,7 @@
       keepassxc
       dotnet-sdk_8
       blender
-      #matlab
+      matlab
       kicad
       krita
       imagemagick
