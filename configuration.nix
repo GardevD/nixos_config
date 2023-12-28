@@ -82,28 +82,28 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-  boot.supportedFilesystems = [ "zfs" ];
+  boot.supportedFilesystems = [ "zfs" "ntfs"];
   programs.steam.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = false;
 
-  nixpkgs.overlays = let
-    nix-matlab = import (builtins.fetchTarball "https://gitlab.com/doronbehar/nix-matlab/-/archive/master/nix-matlab-master.tar.gz");
-  in [
-    nix-matlab.overlay
-    (
-      final: prev: {
-        # Your own overlays...
-      }
-    )
-  ];
+  #nixpkgs.overlays = let
+  #  nix-matlab = import (builtins.fetchTarball "https://gitlab.com/doronbehar/nix-matlab/-/archive/master/nix-matlab-master.tar.gz");
+  #in [
+  #  nix-matlab.overlay
+  #  (
+  #    final: prev: {
+  #      # Your own overlays...
+  #    }
+  #  )
+  #];
 
   users.users.dani = {
     isNormalUser = true;
     description = "Gardev Dániel";
     initialHashedPassword = "$y$j9T$eB1piEmD1KMDq6r1ShZXR/$1vFOtpbzwEWD.xPikpLnyacVSLHmU2Sa6vbrvgTt84/";
     hashedPassword = "$y$j9T$eB1piEmD1KMDq6r1ShZXR/$1vFOtpbzwEWD.xPikpLnyacVSLHmU2Sa6vbrvgTt84/";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "vboxusers" "user-with-access-to-virtualbox"];
     packages = with pkgs; [
       anki
       openjdk17
@@ -114,7 +114,7 @@
       keepassxc
       dotnet-sdk_8
       blender
-      matlab
+      #matlab
       kicad
       krita
       imagemagick
@@ -129,7 +129,10 @@
 	allowUnfree = true;
 	allowUnfreePredicate = (_: true);
   };
-
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.guest.enable = true;
+  nixpkgs.config.virtualbox.host.enableExtensionPack = true;
+  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
 
 
   nix.settings.experimental-features = [ "nix-command" "flakes"];
