@@ -51,6 +51,25 @@ flake-overlays:
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
+  #hyperland
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+  services.xserver.extraArgs = ["-xkbsznc"];
+
+  environment.sessionVariables = {
+    #If your cursor becomes invisible
+    WLR_NO_HARDWARE_CURSORS = "1";
+    #Hint electron apps to use wayland
+    #When I had it on electron apps didn't work
+    #NIXOS_OZONE_WL = "1";
+  };
+
+
+  xdg.portal.enable = true;
+  #xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+
   # Configure keymap in X11
   services.xserver = {
     layout = "hu,dk";
@@ -141,11 +160,23 @@ flake-overlays:
 
 
   environment.systemPackages = with pkgs; [
-      vim
+      dunst
       git
+      kitty
       python3
+      rofi-wayland
+      swww
+      vim
       vivaldi
+      waybar
+      #waybar workspaces display fix:
+      (waybar.overrideAttrs (oldAttrs: {
+        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+      })
+  )
     ];
+
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
