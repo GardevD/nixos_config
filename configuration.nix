@@ -3,12 +3,13 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 flake-overlays:
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      inputs.home-manager.nixosModules.default
     ];
 
   # Bootloader.
@@ -56,7 +57,6 @@ flake-overlays:
     enable = true;
     xwayland.enable = true;
   };
-  services.xserver.extraArgs = ["-xkbsznc"];
 
   environment.sessionVariables = {
     #If your cursor becomes invisible
@@ -139,6 +139,8 @@ flake-overlays:
     #  thunderbird
     ];
   };
+
+  home-manager.users.dani = import ./home.nix;
 
 
   # Allow unfree packages

@@ -16,7 +16,7 @@
     # };
   };
 
-  outputs = { self, nixpkgs, nix-matlab, ... }@inputs:
+  outputs = { self, nixpkgs, nix-matlab, home-manager, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -30,7 +30,7 @@
           specialArgs = {inherit inputs;};
           modules = [ 
             (import ./configuration.nix flake-overlays)
-            # inputs.home-manager.nixosModules.default
+            home-manager.nixosModules.default
           ];
         };
 
