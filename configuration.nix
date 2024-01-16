@@ -123,6 +123,7 @@ flake-overlays:
     extraGroups = [ "networkmanager" "wheel" "vboxusers" "user-with-access-to-virtualbox"];
     packages = with pkgs; [
       anki
+      lutris
       openjdk17
       steam
       vscodium
@@ -136,6 +137,7 @@ flake-overlays:
       krita
       imagemagick
       adoptopenjdk-icedtea-web #javaws is needed for exam monitor SDU
+      wine
     #  thunderbird
     ];
   };
