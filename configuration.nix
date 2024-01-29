@@ -16,6 +16,8 @@ flake-overlays:
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -123,12 +125,12 @@ flake-overlays:
     extraGroups = [ "networkmanager" "wheel" "vboxusers" "user-with-access-to-virtualbox"];
     packages = with pkgs; [
       anki
+      discord
       lutris
       openjdk17
       steam
       vscodium
       vscode
-      discord
       keepassxc
       dotnet-sdk_8
       blender
