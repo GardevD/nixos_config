@@ -7,6 +7,7 @@
     shellAliases = {
         nr = "nix run";
         nd = "nix develop";
+        update-system = "sudo nixos-rebuild switch  --flake /etc/nixos#default --upgrade";
     };
     sessionVariables = {
         XDG_DATA_HOME="$HOME/.local/share";
