@@ -73,10 +73,10 @@ flake-overlays:
   #xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
   # Configure keymap in X11
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "hu,dk";
-    xkbVariant = "nodeadkeys";
-    xkbOptions = "grp:alt_shift_toggle";
+    variant = "nodeadkeys";
+    options = "grp:alt_shift_toggle";
   };
 
   # Configure console keymap
@@ -109,6 +109,8 @@ flake-overlays:
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = false;
 
+  virtualisation.docker.enable = true;
+
   nixpkgs.overlays = [
     (
       final: prev: {
@@ -122,7 +124,7 @@ flake-overlays:
     description = "Gardev Dániel";
     initialHashedPassword = "$y$j9T$eB1piEmD1KMDq6r1ShZXR/$1vFOtpbzwEWD.xPikpLnyacVSLHmU2Sa6vbrvgTt84/";
     hashedPassword = "$y$j9T$eB1piEmD1KMDq6r1ShZXR/$1vFOtpbzwEWD.xPikpLnyacVSLHmU2Sa6vbrvgTt84/";
-    extraGroups = [ "networkmanager" "wheel" "vboxusers" "user-with-access-to-virtualbox"];
+    extraGroups = [ "docker" "networkmanager" "wheel" "vboxusers" "user-with-access-to-virtualbox"];
     packages = with pkgs; [
       anki
       discord
@@ -146,12 +148,16 @@ flake-overlays:
 
   home-manager.users.dani = import ./home.nix;
 
+  fonts.packages = with pkgs; [
+    font-awesome
+  ];
 
   # Allow unfree packages
   nixpkgs.config={
 	allowUnfree = true;
 	allowUnfreePredicate = (_: true);
   };
+  virtualisation.vmware.host.enable = true;
   virtualisation.virtualbox.host.enable = true;
   virtualisation.virtualbox.guest.enable = true;
   nixpkgs.config.virtualbox.host.enableExtensionPack = true;
@@ -197,6 +203,14 @@ flake-overlays:
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 80 443 8080 ];
+    allowedUDPPortRanges = [
+      { from = 4000; to = 4007; }
+      { from = 8000; to = 8010; }
+    ];
+  };
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.

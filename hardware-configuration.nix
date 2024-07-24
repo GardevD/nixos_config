@@ -87,5 +87,6 @@
 
     # Enable the nvidia settings menu
     nvidiaSettings = true;
+    forceFullCompositionPipeline = true;
   };
 }
