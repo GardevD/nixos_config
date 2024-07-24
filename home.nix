@@ -4,6 +4,7 @@
   imports = [
     ./profiles/bash
     ./profiles/git
+    ./profiles/zoxide
   ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
