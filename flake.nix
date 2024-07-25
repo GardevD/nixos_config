@@ -10,13 +10,18 @@
       url = "gitlab:doronbehar/nix-matlab";
     };
 
-    # home-manager = {
-    #   url = "github:nix-community/home-manager";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nix-matlab, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, nix-matlab, home-manager, nixvim, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -31,6 +36,7 @@
           modules = [ 
             (import ./configuration.nix flake-overlays)
             home-manager.nixosModules.default
+            nixvim.nixosModules.nixvim
           ];
         };
 

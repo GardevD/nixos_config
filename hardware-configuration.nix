@@ -58,7 +58,6 @@
   # Make sure opengl is enabled
   hardware.opengl = {
     enable = true;
-    driSupport = true;
     driSupport32Bit = true;
   };
 
