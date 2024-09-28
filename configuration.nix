@@ -10,7 +10,8 @@ flake-overlays:
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
-      #inputs.nixvim.nixosModules.nixvim
+      inputs.nixvim.nixosModules.nixvim
+      ./profiles/nixvim
     ];
 
   # Bootloader.
@@ -145,6 +146,9 @@ flake-overlays:
     #  thunderbird
     ];
   };
+
+  #use content adressing and hardlinks to store duplicates once
+  nix.optimise.automatic = true;
 
   home-manager.users.dani = import ./home.nix;
 

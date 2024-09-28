@@ -36,7 +36,7 @@
           modules = [ 
             (import ./configuration.nix flake-overlays)
             home-manager.nixosModules.default
-            nixvim.nixosModules.nixvim
+            #nixvim.nixosModules.nixvim
           ];
         };
 
