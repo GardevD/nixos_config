@@ -7,7 +7,8 @@
     shellAliases = {
         nr = "nix run";
         nd = "nix develop";
-        update-system = "sudo nixos-rebuild switch  --flake /etc/nixos#default --upgrade";
+        update-system = "nix flake update /etc/nixos && sudo nixos-rebuild switch --flake /etc/nixos#default";
+        sail = "sh $([ -f sail ] && echo sail || echo vendor/bin/sail)";
     };
     sessionVariables = {
         XDG_DATA_HOME="$HOME/.local/share";

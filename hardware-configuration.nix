@@ -8,10 +8,12 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" 
+                                        "i915" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ]; # Make sure intel gpu and nvidia kernel modules are loaded in the right order to avoid race condition
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+  boot.kernelParams = [ "nvidia-drm.modeset=1" ];
 
   fileSystems = 
   {"/" =
@@ -56,9 +58,9 @@
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   # Make sure opengl is enabled
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
 
   # Tell Xorg to use the nvidia driver (also valid for Wayland)

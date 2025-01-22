@@ -14,6 +14,8 @@ flake-overlays:
       ./profiles/nixvim
     ];
 
+
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -26,7 +28,9 @@ flake-overlays:
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
+  networking.hosts = {
+    # "127.0.0.1" = ["nerdle.12boti.com"]; # needed it for webtech project
+  };
   # Enable networking
   networking.networkmanager.enable = true;
 
@@ -55,6 +59,18 @@ flake-overlays:
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
+
+  #postgres for data managment class
+  services = {
+    postgresql = {
+      enable = true;
+      ensureDatabases = [ "mydatabase" ];
+      authentication = pkgs.lib.mkOverride 10 ''
+        #type database  DBuser  auth-method
+        local all       all     trust
+      '';
+    };
+  };
 
   #hyperland
   programs.hyprland = {
@@ -193,6 +209,8 @@ flake-overlays:
     ];
 
 
+
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -209,16 +227,25 @@ flake-overlays:
   # Open ports in the firewall.
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 80 443 8080 ];
+    allowedTCPPorts = [ 80 443 8080 8000 6009 25565 18455];
     allowedUDPPortRanges = [
       { from = 4000; to = 4007; }
-      { from = 8000; to = 8010; }
+      { from = 8000; to = 8100; }
     ];
   };
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  # static ip for PYNQ Z2
+  systemd.network.enable = true;
+  systemd.network.networks."10-ethernet" = {
+    matchConfig.Name = "enp3s0"; # Match the ethernet port by name
+    address = [
+      "192.168.2.1/24" # Assign the static IP address with subnet mask
+    ];
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
