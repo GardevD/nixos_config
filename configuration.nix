@@ -60,18 +60,6 @@ flake-overlays:
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
-  #postgres for data managment class
-  services = {
-    postgresql = {
-      enable = true;
-      ensureDatabases = [ "mydatabase" ];
-      authentication = pkgs.lib.mkOverride 10 ''
-        #type database  DBuser  auth-method
-        local all       all     trust
-      '';
-    };
-  };
-
   #hyperland
   programs.hyprland = {
     enable = true;
@@ -154,7 +142,6 @@ flake-overlays:
       dotnet-sdk_8
       blender
       matlab
-      kicad
       krita
       imagemagick
       adoptopenjdk-icedtea-web #javaws is needed for exam monitor SDU
@@ -170,6 +157,10 @@ flake-overlays:
 
   fonts.packages = with pkgs; [
     font-awesome
+    # for winter theme setup on hyprland
+    fira-code-nerdfont 
+    terminus-nerdfont
+    nerd-fonts.mononoki
   ];
 
   # Allow unfree packages
@@ -177,7 +168,6 @@ flake-overlays:
 	allowUnfree = true;
 	allowUnfreePredicate = (_: true);
   };
-  virtualisation.vmware.host.enable = true;
   virtualisation.virtualbox.host.enable = true;
   virtualisation.virtualbox.guest.enable = true;
   nixpkgs.config.virtualbox.host.enableExtensionPack = true;
@@ -193,9 +183,13 @@ flake-overlays:
 
   environment.systemPackages = with pkgs; [
       dunst
+      eww
       git
+      jq # json processor for eww scripts
       kitty
       python3
+
+      wofi
       rofi-wayland
       swww
       vim
@@ -232,20 +226,30 @@ flake-overlays:
       { from = 4000; to = 4007; }
       { from = 8000; to = 8100; }
     ];
+
   };
+
+  networking.nat = {
+    enable = true;
+    internalInterfaces = [ "enp3s0" ];
+    externalInterface = "wlp0s20f3";
+  };
+
+
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
   # static ip for PYNQ Z2
-  systemd.network.enable = true;
-  systemd.network.networks."10-ethernet" = {
-    matchConfig.Name = "enp3s0"; # Match the ethernet port by name
-    address = [
-      "192.168.2.1/24" # Assign the static IP address with subnet mask
-    ];
-  };
+  # systemd.network.enable = true;
+  # systemd.network.wait-online.enable = false;
+  # systemd.network.networks."10-ethernet" = {
+  #   matchConfig.Name = "enp3s0"; # Match the ethernet port by name
+  #   address = [
+  #     "192.168.2.1/24" # Assign the static IP address with subnet mask
+  #   ];
+  # };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
