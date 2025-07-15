@@ -1,10 +1,12 @@
-{ config, pkgs, ... }:
+impermanence: { config, pkgs, ... }:
 
 {
   imports = [
+    impermanence.homeManagerModules.impermanence
     ./profiles/bash
     ./profiles/git
     ./profiles/zoxide
+    ./profiles/impermanence
   ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -75,5 +77,4 @@
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
-
 }

@@ -9,7 +9,7 @@ flake-overlays:
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default
+      #inputs.home-manager.nixosModules.default
       inputs.nixvim.nixosModules.nixvim
       ./profiles/nixvim
     ];
@@ -17,7 +17,13 @@ flake-overlays:
 
 
   # Bootloader.
+
+  ## according to https://gist.github.com/lesserfish/8c0cfc6bb07c17c5af8a3759d2eb9e9a :
+  #boot.loader.grub.zfsSupport = true; # idk if needed cause we have zfs in the supportedfilesystems list
   boot.loader.systemd-boot.enable = true;
+  #boot.loader.grub.device = "nodev";
+  #boot.loader.grub.efiSupport = true;
+
   boot.loader.efi.canTouchEfiVariables = true;
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -153,7 +159,6 @@ flake-overlays:
   #use content adressing and hardlinks to store duplicates once
   nix.optimise.automatic = true;
 
-  home-manager.users.dani = import ./home.nix;
 
   fonts.packages = with pkgs; [
     font-awesome
@@ -235,6 +240,28 @@ flake-overlays:
     externalInterface = "wlp0s20f3";
   };
 
+
+  # impermanence
+  environment.persistence."/persistence" = {
+    enable = true;  # NB: Defaults to true, not needed
+    hideMounts = true;
+    directories = [
+      "/etc/nixos"
+      "/etc/ssh"
+      "/var/lib/nixos" # https://github.com/nix-community/impermanence/pull/114
+      "/var/lib/acme"
+      "/var/lib/mysql"
+      "/var/lib/systemd/timers"
+      "/var/log"
+      "/var/lib/bluetooth"
+      "/etc/NetworkManager/system-connections"
+    ];
+
+    files = [
+      "/etc/machine-id"
+    ];
+  };
+  programs.fuse.userAllowOther = true; # needed for home-manager impermanence config
 
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

@@ -32,6 +32,11 @@
          device = "rpool/persistence";
          fsType = "zfs";
       };
+      "/persistence/home" = {
+         neededForBoot = true;
+         device = "rpool/home";
+         fsType = "zfs";
+      };
 
     "/boot" =
     { device = "/dev/disk/by-uuid/2365-1045";
@@ -44,6 +49,17 @@
   swapDevices =
     [ { device = "/dev/disk/by-uuid/afcd35de-f896-4a50-8ce0-009cbbd74d6b"; }
     ];
+
+/*
+  boot.initrd.postDeviceCommands = lib.mkOrder 2000 ''
+    echo "[initrd] Attempting ZFS rollback..." >> /dev/kmsg
+    if zfs rollback -r rpool/root@empty >> /dev/kmsg 2>&1; then
+      echo "[initrd] ZFS rollback successful." >> /dev/kmsg
+    else
+      echo "[initrd] ZFS rollback failed!" >> /dev/kmsg
+    fi  '';
+*/
+
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
