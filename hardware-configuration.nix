@@ -50,15 +50,13 @@
     [ { device = "/dev/disk/by-uuid/afcd35de-f896-4a50-8ce0-009cbbd74d6b"; }
     ];
 
-/*
-  boot.initrd.postDeviceCommands = lib.mkOrder 2000 ''
+  boot.initrd.postMountCommands = lib.mkAfter ''
     echo "[initrd] Attempting ZFS rollback..." >> /dev/kmsg
     if zfs rollback -r rpool/root@empty >> /dev/kmsg 2>&1; then
       echo "[initrd] ZFS rollback successful." >> /dev/kmsg
     else
       echo "[initrd] ZFS rollback failed!" >> /dev/kmsg
-    fi  '';
-*/
+    fi'';
 
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
