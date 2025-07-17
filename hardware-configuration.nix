@@ -51,11 +51,20 @@
     ];
 
   boot.initrd.postMountCommands = lib.mkAfter ''
-    echo "[initrd] Attempting ZFS rollback..." >> /dev/kmsg
-    if zfs rollback -r rpool/root@empty >> /dev/kmsg 2>&1; then
-      echo "[initrd] ZFS rollback successful." >> /dev/kmsg
+    timestamp=$(date "+%Y-%m-%d_%H-%M-%S")
+    zfs snapshot rpool/root@archived-$timestamp
+    zfs clone rpool/root@archived-$timestamp rpool/archived/archived-$timestamp
+    echo "Archive snapshot created: rpool/archived/archived-$timestamp"
+
+    zfs list -t snapshot -o name -s creation | grep '^rpool/archived/' | head -n -10 | while read archive; do
+      echo "Destroying old arhcive: $archive"
+      zfs destroy "archive"
+    done
+
+    if zfs rollback -r rpool/root@empty; then
+      echo "[initrd] ZFS rollback successful."
     else
-      echo "[initrd] ZFS rollback failed!" >> /dev/kmsg
+      echo "[initrd] ZFS rollback failed!"
     fi'';
 
 

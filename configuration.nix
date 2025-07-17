@@ -66,7 +66,7 @@ flake-overlays:
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
-  services.gnome.gnome-initial-setup.enable = false
+  services.gnome.gnome-initial-setup.enable = false;
   #hyperland
   programs.hyprland = {
     enable = true;
