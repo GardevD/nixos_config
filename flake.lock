@@ -1,5 +1,22 @@
 {
   "nodes": {
+    "factorioSpaceAge": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1752756941,
+        "narHash": "sha256-lFE3jlIK+57Y5UHrIAOtNwnjJQwRvMEudYLtybmPiRg=",
+        "owner": "priegger",
+        "repo": "nixpkgs",
+        "rev": "df7b71810f398785fcf753f638cd6c6cbc5366ca",
+        "type": "github"
+      },
+      "original": {
+        "owner": "priegger",
+        "ref": "update-factorio",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -214,6 +231,7 @@
     },
     "root": {
       "inputs": {
+        "factorioSpaceAge": "factorioSpaceAge",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "nix-matlab": "nix-matlab",

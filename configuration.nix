@@ -3,7 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 flake-overlays:
 
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, factorio, ... }:
 
 {
   imports =
@@ -179,6 +179,10 @@ flake-overlays:
   nixpkgs.config.virtualbox.host.enableExtensionPack = true;
   users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
 
+  # factorio
+  system.extraDependencies = [
+    factorio.factorio-space-age.src
+  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes"];
   # List packages installed in system profile. To search, run:

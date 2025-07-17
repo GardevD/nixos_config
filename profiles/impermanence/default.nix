@@ -14,6 +14,7 @@
       "sdu"
       "Videos"
       "wallpapers"
+      ".factorio"
       ".gnupg"
       ".ssh"
       ".nixops"

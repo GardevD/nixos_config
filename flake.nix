@@ -21,19 +21,27 @@
     };
 
     impermanence.url = "github:nix-community/impermanence";
+
+    factorioSpaceAge.url = "github:priegger/nixpkgs/update-factorio";
+    factorioSpaceAge.flake = false;
   };
 
-  outputs = { self, nixpkgs, nix-matlab, home-manager, nixvim, impermanence, ... }@inputs:
+  outputs = { self, nixpkgs, nix-matlab, home-manager, nixvim, impermanence, factorioSpaceAge, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       flake-overlays = [
         nix-matlab.overlay
       ];
+
+      factorio = import factorioSpaceAge {
+        inherit system;
+        config = {};
+      };
     in
     {
       nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit inputs;};
+          specialArgs = {inherit inputs; inherit factorio;};
           modules = [ 
             impermanence.nixosModules.impermanence
             (import ./configuration.nix flake-overlays)
