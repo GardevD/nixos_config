@@ -53,7 +53,7 @@
   boot.initrd.postMountCommands = lib.mkAfter ''
     timestamp=$(date "+%Y-%m-%d_%H-%M-%S")
     zfs snapshot rpool/root@archived-$timestamp
-    zfs clone rpool/root@archived-$timestamp rpool/archived/archived-$timestamp
+    zfs send rpool/root@archived-$timestamp | zfs recv rpool/archived/archived-$timestamp
     echo "Archive snapshot created: rpool/archived/archived-$timestamp"
 
     zfs list -t snapshot -o name -s creation | grep '^rpool/archived/' | head -n -10 | while read archive; do
