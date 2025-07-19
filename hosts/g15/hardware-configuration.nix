@@ -8,8 +8,8 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" 
-                                        "i915" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ]; # Make sure intel gpu and nvidia kernel modules are loaded in the right order to avoid race condition
+  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
+                                        # maybe not needed anymore, but could just be lucky with race condition: "i915" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ]; # Make sure intel gpu and nvidia kernel modules are loaded in the right order to avoid race condition
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];

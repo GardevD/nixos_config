@@ -3,32 +3,26 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 flake-overlays:
 
-{ config, pkgs, inputs, factorio, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ../common.nix
+      ../../users/dani
       #inputs.home-manager.nixosModules.default
-      inputs.nixvim.nixosModules.nixvim
-      ./profiles/nixvim
+
     ];
 
 
-
   # Bootloader.
-
-  ## according to https://gist.github.com/lesserfish/8c0cfc6bb07c17c5af8a3759d2eb9e9a :
-  #boot.loader.grub.zfsSupport = true; # idk if needed cause we have zfs in the supportedfilesystems list
   boot.loader.systemd-boot.enable = true;
-  #boot.loader.grub.device = "nodev";
-  #boot.loader.grub.efiSupport = true;
-
   boot.loader.efi.canTouchEfiVariables = true;
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "g15"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -40,23 +34,6 @@ flake-overlays:
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
-  time.timeZone = "Europe/Budapest";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "hu_HU.UTF-8";
-    LC_IDENTIFICATION = "hu_HU.UTF-8";
-    LC_MEASUREMENT = "hu_HU.UTF-8";
-    LC_MONETARY = "hu_HU.UTF-8";
-    LC_NAME = "hu_HU.UTF-8";
-    LC_NUMERIC = "hu_HU.UTF-8";
-    LC_PAPER = "hu_HU.UTF-8";
-    LC_TELEPHONE = "hu_HU.UTF-8";
-    LC_TIME = "hu_HU.UTF-8";
-  };
 
 
   # Enable the X11 windowing system.
@@ -67,6 +44,7 @@ flake-overlays:
   services.xserver.desktopManager.gnome.enable = true;
 
   services.gnome.gnome-initial-setup.enable = false;
+
   #hyperland
   programs.hyprland = {
     enable = true;
@@ -82,6 +60,7 @@ flake-overlays:
   };
 
 
+  # for wayland to enable screen sharing
   xdg.portal.enable = true;
   #xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
@@ -92,11 +71,7 @@ flake-overlays:
     options = "grp:alt_shift_toggle";
   };
 
-  # Configure console keymap
-  console.keyMap = "dk";
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
@@ -116,10 +91,8 @@ flake-overlays:
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-  boot.supportedFilesystems = [ "zfs" "ntfs"];
-  programs.steam.enable = true;
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.mutableUsers = false;
+  boot.supportedFilesystems = [ "zfs" ];
+
 
   virtualisation.docker.enable = true;
 
@@ -131,34 +104,7 @@ flake-overlays:
     )
   ] ++ flake-overlays;
 
-  users.users.dani = {
-    isNormalUser = true;
-    description = "Gardev Dániel";
-    initialHashedPassword = "$y$j9T$eB1piEmD1KMDq6r1ShZXR/$1vFOtpbzwEWD.xPikpLnyacVSLHmU2Sa6vbrvgTt84/";
-    hashedPassword = "$y$j9T$eB1piEmD1KMDq6r1ShZXR/$1vFOtpbzwEWD.xPikpLnyacVSLHmU2Sa6vbrvgTt84/";
-    extraGroups = [ "docker" "networkmanager" "wheel" "vboxusers" "user-with-access-to-virtualbox"];
-    packages = with pkgs; [
-      anki
-      discord
-      lutris
-      openjdk17
-      steam
-      vscodium
-      vscode
-      keepassxc
-      dotnet-sdk_8
-      blender
-      matlab
-      krita
-      imagemagick
-      adoptopenjdk-icedtea-web #javaws is needed for exam monitor SDU
-      wine
-    #  thunderbird
-    ];
-  };
 
-  #use content adressing and hardlinks to store duplicates once
-  nix.optimise.automatic = true;
 
 
   fonts.packages = with pkgs; [
@@ -169,22 +115,12 @@ flake-overlays:
     nerd-fonts.mononoki
   ];
 
-  # Allow unfree packages
-  nixpkgs.config={
-	allowUnfree = true;
-	allowUnfreePredicate = (_: true);
-  };
   virtualisation.virtualbox.host.enable = true;
   virtualisation.virtualbox.guest.enable = true;
   nixpkgs.config.virtualbox.host.enableExtensionPack = true;
   users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
 
-  # factorio
-  system.extraDependencies = [
-    factorio.factorio-space-age.src
-  ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes"];
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.

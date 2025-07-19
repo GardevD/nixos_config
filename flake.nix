@@ -40,17 +40,22 @@
       };
     in
     {
-      nixosConfigurations.default = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.g15 = nixpkgs.lib.nixosSystem {
           specialArgs = {inherit inputs; inherit factorio;};
           modules = [ 
             impermanence.nixosModules.impermanence
-            (import ./configuration.nix flake-overlays)
+            (import ./hosts/g15/default.nix flake-overlays)
 
             home-manager.nixosModules.home-manager
             {
-              #home-manager.useGlobalPkgs = true;
-              #home-manager.useUserPackages = true;
-              home-manager.users.dani = import ./home.nix impermanence;
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.dani = { 
+                imports = [ 
+                  impermanence.homeManagerModules.impermanence
+                  ./home.nix
+                ];
+              };
               #home-manager.backupFileExtension = "bak";
             }
 

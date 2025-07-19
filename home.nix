@@ -1,8 +1,7 @@
-impermanence: { config, pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   imports = [
-    impermanence.homeManagerModules.impermanence
     ./profiles/bash
     ./profiles/git
     ./profiles/zoxide
