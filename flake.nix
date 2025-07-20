@@ -41,7 +41,7 @@
     in
     {
       nixosConfigurations.g15 = nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit inputs; inherit factorio;};
+          specialArgs = {inherit inputs; inherit factorio; a = impermanence.homeManagerModules.impermanence; };
           modules = [ 
             impermanence.nixosModules.impermanence
             (import ./hosts/g15/default.nix flake-overlays)
@@ -50,12 +50,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.dani = { 
-                imports = [ 
-                  impermanence.homeManagerModules.impermanence
-                  ./home.nix
-                ];
-              };
+
               #home-manager.backupFileExtension = "bak";
             }
 

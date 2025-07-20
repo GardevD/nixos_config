@@ -10,8 +10,8 @@ flake-overlays:
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../common.nix
-      ../../users/dani
-      #inputs.home-manager.nixosModules.default
+      ./users
+     #inputs.home-manager.nixosModules.default
 
     ];
 
