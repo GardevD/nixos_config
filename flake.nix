@@ -24,9 +24,20 @@
 
     factorioSpaceAge.url = "github:priegger/nixpkgs/update-factorio";
     factorioSpaceAge.flake = false;
+
+    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
   };
 
-  outputs = { self, nixpkgs, nix-matlab, home-manager, nixvim, impermanence, factorioSpaceAge, ... }@inputs:
+  nixConfig = {
+    extra-substituters = [
+      "https://nixos-raspberrypi.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
+    ];
+  };
+
+  outputs = { self, nixpkgs, nix-matlab, home-manager, nixvim, impermanence, factorioSpaceAge, nixos-raspberrypi, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -55,6 +66,22 @@
             }
 
             #nixvim.nixosModules.nixvim
+          ];
+        };
+
+      nixosConfigurations.rpi5 = nixos-raspberrypi.lib.nixosSystem {
+          specialArgs = { 
+            inherit inputs;
+            inherit nixos-raspberrypi; # this has to be here for reasons unknown to me
+          };
+          modules = [
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+            }
+
+            ./hosts/rpi5
           ];
         };
 
