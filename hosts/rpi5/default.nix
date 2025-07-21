@@ -4,10 +4,10 @@
     inputs.nixos-raspberrypi.nixosModules.raspberry-pi-5.bluetooth
     ./users
     ./hardware-configuration.nix
+    ../nixosModules/common.nix
   ];
   networking.hostName = "rpi5";
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   services.openssh.enable = true;
   networking.networkmanager.enable = true;
 

@@ -54,7 +54,7 @@
       nixosConfigurations.g15 = nixpkgs.lib.nixosSystem {
           specialArgs = {inherit inputs; inherit factorio; a = impermanence.homeManagerModules.impermanence; };
           modules = [ 
-            impermanence.nixosModules.impermanence
+            
             (import ./hosts/g15/default.nix flake-overlays)
 
             home-manager.nixosModules.home-manager

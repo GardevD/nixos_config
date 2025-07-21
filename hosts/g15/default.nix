@@ -9,7 +9,8 @@ flake-overlays:
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ../common.nix
+      ../nixosModules/common.nix
+      ../nixosModules/impermanence.nix
       ./users
      #inputs.home-manager.nixosModules.default
 
@@ -182,27 +183,7 @@ flake-overlays:
   };
 
 
-  # impermanence
-  environment.persistence."/persistence" = {
-    enable = true;  # NB: Defaults to true, not needed
-    hideMounts = true;
-    directories = [
-      "/etc/nixos"
-      "/etc/ssh"
-      "/var/lib/nixos" # https://github.com/nix-community/impermanence/pull/114
-      "/var/lib/acme"
-      "/var/lib/mysql"
-      "/var/lib/systemd/timers"
-      "/var/log"
-      "/var/lib/bluetooth"
-      "/etc/NetworkManager/system-connections"
-    ];
 
-    files = [
-      "/etc/machine-id"
-    ];
-  };
-  programs.fuse.userAllowOther = true; # needed for home-manager impermanence config
 
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
