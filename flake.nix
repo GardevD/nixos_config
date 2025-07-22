@@ -53,8 +53,7 @@
     {
       nixosConfigurations.g15 = nixpkgs.lib.nixosSystem {
           specialArgs = {inherit inputs; inherit factorio; a = impermanence.homeManagerModules.impermanence; };
-          modules = [ 
-            
+           modules = [ 
             (import ./hosts/g15/default.nix flake-overlays)
 
             home-manager.nixosModules.home-manager
@@ -74,7 +73,7 @@
             inherit inputs;
             inherit nixos-raspberrypi; # this has to be here for reasons unknown to me
           };
-          modules = [
+         modules = [
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;

@@ -1,7 +1,8 @@
 { inputs, ... }: {
   imports = [
     inputs.impermanence.nixosModules.impermanence
-  ]
+  ];
+
   environment.persistence."/persistence" = {
     enable = true;  # NB: Defaults to true, not needed
     hideMounts = true;
