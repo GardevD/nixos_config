@@ -100,7 +100,7 @@
         "owner": "nix-community",
         "repo": "home-manager",
         "rev": "3641df95becab34d2d7a221218091c2cea2d9c2e",
-        "type": "github"
+       "type": "github"
       },
       "original": {
         "owner": "nix-community",
@@ -232,6 +232,22 @@
       }
     },
     "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1751644338,
+        "narHash": "sha256-dXN4Ig8grBd7Hd5zk9bSmajZlcGbJbqLNI0LCus9+A0=",
+        "owner": "nvmd",
+        "repo": "nixpkgs",
+        "rev": "df3e3357bdc6ec1c098f5baedbec86320f26d84c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvmd",
+        "ref": "modules-with-keys-25.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1752950548,
         "narHash": "sha256-NS6BLD0lxOrnCiEOcvQCDVPXafX1/ek1dfJHX1nUIzc=",
