@@ -16,6 +16,7 @@
       "/var/log"
       "/var/lib/bluetooth"
       "/etc/NetworkManager/system-connections"
+      "/etc/wireguard" # to do make an option for this and move to wireguard setup
     ];
 
     files = [
