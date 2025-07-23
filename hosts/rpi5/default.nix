@@ -6,6 +6,7 @@
     ./hardware-configuration.nix
     ../nixosModules/common.nix
     ../nixosModules/impermanence.nix
+    ../nixosModules/wireguard-server.nix
   ];
   networking.hostName = "rpi5";
 
