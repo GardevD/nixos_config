@@ -148,7 +148,11 @@ flake-overlays:
   )
     ];
 
-
+  # for resolving rpi5.local durin ssh
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+  };
 
 
   # Some programs need SUID wrappers, can be configured further or are
