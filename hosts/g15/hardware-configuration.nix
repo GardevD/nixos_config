@@ -50,24 +50,6 @@
     [ { device = "/dev/disk/by-uuid/afcd35de-f896-4a50-8ce0-009cbbd74d6b"; }
     ];
 
-  boot.initrd.postMountCommands = lib.mkAfter ''
-    timestamp=$(date "+%Y-%m-%d_%H-%M-%S")
-    zfs snapshot rpool/root@archived-$timestamp
-    zfs send rpool/root@archived-$timestamp | zfs recv rpool/archived/archived-$timestamp
-    echo "Archive snapshot created: rpool/archived/archived-$timestamp"
-
-    zfs list -t snapshot -o name -s creation | grep '^rpool/archived/' | head -n -10 | while read archive; do
-      echo "Destroying old arhcive: $archive"
-      zfs destroy "archive"
-    done
-
-    if zfs rollback -r rpool/root@empty; then
-      echo "[initrd] ZFS rollback successful."
-    else
-      echo "[initrd] ZFS rollback failed!"
-    fi'';
-
-
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction

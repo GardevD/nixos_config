@@ -1,4 +1,4 @@
-{ inputs, ... }: {
+{ lib, inputs, ... }: {
   imports = [
     inputs.impermanence.nixosModules.impermanence
   ];
@@ -24,4 +24,23 @@
     ];
   };
   programs.fuse.userAllowOther = true; # needed for home-manager impermanence config
+
+
+  boot.initrd.postMountCommands = lib.mkAfter ''
+    timestamp=$(date "+%Y-%m-%d_%H-%M-%S")
+    zfs snapshot rpool/root@archived-$timestamp
+    zfs send rpool/root@archived-$timestamp | zfs recv rpool/archived/archived-$timestamp
+    echo "Archive snapshot created: rpool/archived/archived-$timestamp"
+
+    zfs list -o name -s creation | grep '^rpool/archived/archived-' | head -n -10 | while read archive; do
+      echo "Destroying old arhcive: $archive"
+      zfs destroy -r "$archive"
+    done
+
+    if zfs rollback -r rpool/root@empty; then
+      echo "[initrd] ZFS rollback successful."
+    else
+      echo "[initrd] ZFS rollback failed!"
+    fi'';
+
 }
