@@ -9,6 +9,7 @@
       ".gnupg"
       ".ssh"
       ".nixops"
+      ".local/share/zoxide"
    ];
     files = [
       ".bash_history"
