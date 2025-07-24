@@ -7,10 +7,10 @@
     ../nixosModules/common.nix
     ../nixosModules/impermanence.nix
     ../nixosModules/wireguard-server.nix
+    ../nixosModules/ssh-server.nix
   ];
   networking.hostName = "rpi5";
 
-  services.openssh.enable = true;
   networking.networkmanager.enable = true;
 
   services.avahi = {
