@@ -34,8 +34,8 @@
           allowedIPs = [ "10.100.0.2/32" ];
         }
         {
-          # Phone
-          publicKey = "1gsLvKsb7YeGh2kCSFczCi/RpPExTbLZBpPPkGCOSU4=";
+          # g15
+          publicKey = "FA7uELo9U45DieaHUI+MQK1HXCzMLxtqmysYs38nOyY=";
           # List of IPs assigned to this peer within the tunnel subnet. Used to configure routing.
           allowedIPs = [ "10.100.0.3/32" ];
         }
