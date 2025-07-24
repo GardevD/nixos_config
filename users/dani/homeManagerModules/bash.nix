@@ -7,7 +7,7 @@
     shellAliases = {
         nr = "nix run";
         nd = "nix develop";
-        update-system = "nix flake update --flake /etc/nixos && sudo nixos-rebuild switch --flake /etc/nixos#rpi5";
+        update-system = "nix flake update --flake /etc/nixos && sudo nixos-rebuild switch --flake /etc/nixos";
     };
     /* to do: make an option for these + check fi there is a better alternative than this
     sessionVariables = {
