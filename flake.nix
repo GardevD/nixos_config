@@ -26,6 +26,8 @@
     factorioSpaceAge.flake = false;
 
     nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
+
+    nixCats-lazyVim.url = "path:flakes/nixCats-lazyVim";
   };
 
   nixConfig = {

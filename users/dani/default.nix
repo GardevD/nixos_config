@@ -1,9 +1,6 @@
 { pkgs, inputs, ... }:
 {
-  imports = [
-      inputs.nixvim.nixosModules.nixvim
-      ../../profiles/nixvim
-  ];
+  imports = [];
 
 
   users.users.dani = {
@@ -16,7 +13,7 @@
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
-    users.dani = {
+    users.dani = { 
       imports = [
         ./home.nix
       ];

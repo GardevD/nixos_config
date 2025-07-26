@@ -6,8 +6,11 @@
     ./homeManagerModules/bash.nix
     ./homeManagerModules/git.nix
     ./homeManagerModules/zoxide.nix
+    inputs.nixCats-lazyVim.homeModules.default
     # inputs.impermanence.homeManagerModules.impermanence
   ];
+
+  nixCats.enable = true;
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
