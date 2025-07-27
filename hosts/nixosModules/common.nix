@@ -1,4 +1,4 @@
-{...}:
+{pkgs, ...}:
 {
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = false;
@@ -32,4 +32,14 @@
     allowUnfreePredicate = (_: true);
   };
   nix.settings.experimental-features = [ "nix-command" "flakes"];
+
+  fonts.packages = with pkgs; [
+    # needed for lazygit
+    font-awesome
+    nerd-fonts.mononoki
+    # for winter theme setup on hyprland
+    # nerd-fonts.fira-code
+    # terminus-nerdfont
+  ];
+
 }

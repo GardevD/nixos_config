@@ -41,9 +41,8 @@ flake-overlays:
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
   services.gnome.gnome-initial-setup.enable = false;
 
   #hyperland
@@ -75,7 +74,7 @@ flake-overlays:
 
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -108,13 +107,6 @@ flake-overlays:
 
 
 
-  fonts.packages = with pkgs; [
-    font-awesome
-    # for winter theme setup on hyprland
-    fira-code-nerdfont 
-    terminus-nerdfont
-    nerd-fonts.mononoki
-  ];
 
   virtualisation.virtualbox.host.enable = true;
   virtualisation.virtualbox.guest.enable = true;
