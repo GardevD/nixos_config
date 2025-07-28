@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{pkgs, inputs, ...}:
 {
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = false;
@@ -42,8 +42,11 @@
     # terminus-nerdfont
   ];
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = (with pkgs; [
     ripgrep
     uutils-coreutils-noprefix
-  ];
+  ] ++ [ 
+    inputs.comma.packages.${pkgs.system}.comma
+    inputs.nix-index.packages.${pkgs.system}.default
+  ]);
 }

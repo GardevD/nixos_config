@@ -21,13 +21,12 @@
     };
 
     impermanence.url = "github:nix-community/impermanence";
-
     factorioSpaceAge.url = "github:priegger/nixpkgs/update-factorio";
     factorioSpaceAge.flake = false;
-
     nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
-
     nixCats-lazyVim.url = "path:flakes/nixCats-lazyVim";
+    comma.url = "github:nix-community/comma";
+    nix-index.url = "github:nix-community/nix-index";
   };
 
   nixConfig = {

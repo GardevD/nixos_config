@@ -13,7 +13,8 @@
       "/var/lib/acme"
       "/var/lib/mysql"
       "/var/lib/systemd/timers"
-      "/var/log"
+      "/var/log/journal"
+      "/run/log/journal"
       "/var/lib/bluetooth"
       "/etc/NetworkManager/system-connections"
       "/etc/wireguard" # to do make an option for this and move to wireguard setup

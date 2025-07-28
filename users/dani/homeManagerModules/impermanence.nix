@@ -10,6 +10,7 @@
       ".ssh"
       ".nixops"
       ".local/share/zoxide"
+      ".cache/nix-index"
    ];
     files = [
       ".bash_history"
