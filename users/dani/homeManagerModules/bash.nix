@@ -3,11 +3,12 @@
   nixpkgs.config.allowUnfree = true;
   programs.bash = {
     enable = true;
-    historyIgnore = ["ls" "cd"];
+    historyIgnore = ["ls" "l" "ll" "cd"];
     shellAliases = {
-        nr = "nix run";
-        nd = "nix develop";
-        update-system = "nix flake update --flake /etc/nixos && sudo nixos-rebuild switch --flake /etc/nixos";
+      nr = "nix run";
+      nd = "nix develop";
+      l = "eza -la";
+      update-system = "nix flake update --flake /etc/nixos && sudo nixos-rebuild switch --flake /etc/nixos";
     };
     /* to do: make an option for these + check fi there is a better alternative than this
     sessionVariables = {
