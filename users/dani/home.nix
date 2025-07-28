@@ -11,12 +11,15 @@
     # inputs.impermanence.homeManagerModules.impermanence
   ];
 
-  nixCats.enable = true;
+  nvim.enable = true;
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "dani";
   home.homeDirectory = "/home/dani";
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
