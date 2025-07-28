@@ -42,4 +42,8 @@
     # terminus-nerdfont
   ];
 
+  environment.systemPackages = with pkgs; [
+    ripgrep
+    uutils-coreutils-noprefix
+  ];
 }
