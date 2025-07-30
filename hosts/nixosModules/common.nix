@@ -32,6 +32,7 @@
     allowUnfreePredicate = (_: true);
   };
   nix.settings.experimental-features = [ "nix-command" "flakes"];
+  nix.settings.trusted-users = [ "root" ]; # might get rid of asking about substitures
 
   fonts.packages = with pkgs; [
     # needed for lazygit
