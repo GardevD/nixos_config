@@ -68,7 +68,7 @@ flake-overlays:
   services.xserver.xkb = {
     layout = "hu,dk";
     variant = "nodeadkeys";
-    options = "grp:alt_shift_toggle";
+    options = "grp:win_space_toggle, numpad:mac, caps:escape"; # rules explained in evdev.lst
   };
 
 
