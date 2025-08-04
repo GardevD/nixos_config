@@ -7,6 +7,7 @@
     ./homeManagerModules/git.nix
     ./homeManagerModules/zoxide.nix
     ./homeManagerModules/eza.nix
+    ./homeManagerModules/gnome.nix
     inputs.nixCats-lazyVim.homeModules.default
     # inputs.impermanence.homeManagerModules.impermanence
   ];
@@ -20,6 +21,7 @@
   home.sessionVariables = {
     EDITOR = "nvim";
   };
+
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release

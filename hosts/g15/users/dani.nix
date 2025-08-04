@@ -23,7 +23,10 @@
         "Videos"
         "wallpapers"
         ".factorio"
-        ".local" # to do change
+        ".local/lib/vivaldi"
+        ".local/share/Anki2"
+        ".local/share/Steam"
+        ".local/share/Terraria"
         ".config/Code"
         ".config/discord"
         ".config/vivaldi"
