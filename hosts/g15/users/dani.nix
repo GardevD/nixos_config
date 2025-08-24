@@ -7,7 +7,10 @@
 
   # to do make an option for extra directories in impermanence module
   home-manager.users.dani = {
-    imports = [ ../../../users/dani/homeManagerModules/impermanence.nix ];
+    imports = [ 
+      ../../../users/dani/homeManagerModules/impermanence.nix
+      ../../../users/dani/homeManagerModules/hyprland.nix
+    ];
     home.persistence."/persistence/home" = {
       directories = [
         "ctf"

@@ -50,6 +50,7 @@ flake-overlays:
     enable = true;
     xwayland.enable = true;
   };
+  programs.hyprlock.enable = true;
 
   environment.sessionVariables = {
     #If your cursor becomes invisible
