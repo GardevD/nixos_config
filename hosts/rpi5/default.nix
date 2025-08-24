@@ -23,7 +23,43 @@
       workstation = true;
     };
   };
+
+  virtualisation.docker.enable = true;
+
   
+  users.groups.media = {};
+  services.jellyseerr = {
+    enable = true;
+    openFirewall = true;
+  };
+  services.jellyfin = {
+    enable = true;
+    openFirewall = true;
+    group = "media";
+  };
+
+  services.radarr = {
+    enable = true;
+    openFirewall = true;
+    group = "media";
+  };
+
+  services.transmission = {
+    enable = true;
+    openPeerPorts = true;
+    openRPCPort = true;
+    settings = {
+      rpc-bind-address = "0.0.0.0";
+      rpc-whitelist = "127.0.0.1,10.100.0.3,192.168.0.23";
+    };
+    group = "media";
+  };
+
+  services.prowlarr = {
+    enable = true;
+    openFirewall = true;
+  };
+
   /*
   nixpkgs.overlays = [
     (self: super:
@@ -36,7 +72,6 @@
     )
   ];
 
-  #environment.systemPackages = [ pkgs.vectorchord ];
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_16.withPackages (ps: [ ps.pgvector pkgs.vectorchord ]);
