@@ -65,14 +65,23 @@ flake-overlays:
   xdg.portal.enable = true;
   #xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "hu,dk";
-    variant = "nodeadkeys";
-    options = "grp:win_space_toggle, numpad:mac, caps:escape"; # rules explained in evdev.lst
+  # chinese IME
+  i18n.inputMethod = {
+    enable = true;
+    type = "ibus";
+    ibus = {
+      engines = with pkgs.ibus-engines; [
+        pinyin
+      ];
+    };
   };
 
 
+  # Set your time zone based on location
+  #services.automatic-timezoned.enable = true; # automatic-timezoned is buggy ig
+  services.tzupdate.enable = true; # sometimes doesn't work up
+  services.tzupdate.timer.enable = true;
+  time.timeZone = null; # don't override automatic-timezoned
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;

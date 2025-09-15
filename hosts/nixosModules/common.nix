@@ -7,8 +7,6 @@
   console.keyMap = "hu";
 
 
-  # Set your time zone.
-  time.timeZone = "Europe/Budapest";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
