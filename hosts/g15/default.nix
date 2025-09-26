@@ -34,6 +34,7 @@ flake-overlays:
   };
   # Enable networking
   networking.networkmanager.enable = true;
+  systemd.services.NetworkManager-wait-online.enable = false; 
 
 
 
@@ -104,7 +105,10 @@ flake-overlays:
   boot.supportedFilesystems = [ "zfs" ];
 
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = false;
+  };
 
   nixpkgs.overlays = [
     (
@@ -138,7 +142,7 @@ flake-overlays:
       jq # json processor for eww scripts
       kitty
       python3
-
+      scala
       wofi
       rofi-wayland
       swww
