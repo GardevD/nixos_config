@@ -144,7 +144,7 @@ flake-overlays:
       python3
       scala
       wofi
-      rofi-wayland
+      rofi
       swww
       vim
       vivaldi
