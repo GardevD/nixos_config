@@ -5,6 +5,7 @@
     ./users
     ./hardware-configuration.nix
     ../nixosModules/common.nix
+    ../nixosModules/immich.nix
     ../nixosModules/impermanence.nix
     ../nixosModules/wireguard-server.nix
     ../nixosModules/ssh-server.nix
@@ -26,10 +27,12 @@
 
   virtualisation.docker.enable = true;
 
-  
+  time.timeZone = "Europe/Budapest";
+  /*
   users.groups.media = {};
   services.jellyseerr = {
     enable = true;
+    port = 5056; # 5055 is taken by traccar
     openFirewall = true;
   };
   services.jellyfin = {
@@ -59,45 +62,16 @@
     enable = true;
     openFirewall = true;
   };
+*/
 
-  /*
-  nixpkgs.overlays = [
-    (self: super:
-      let
-        pkgsUnstable = import inputs.nixpkgs { system = "aarch64-linux"; };
-      in
-      {
-        vectorchord = pkgsUnstable.postgresql16Packages.vectorchord;
-      }
-    )
-  ];
-
-  services.postgresql = {
+  services.traccar = {
     enable = true;
-    package = pkgs.postgresql_16.withPackages (ps: [ ps.pgvector pkgs.vectorchord ]);
-
-    ensureDatabases = [ "immich" ];
-      ensureUsers = [
-        {
-          name = "immich";
-          ensureDBOwnership = true;
-          ensureClauses.login = true;
-        }
-      ];
-      extensions = ps: [ ps.pgvector pkgs.vectorchord ];
-      settings = {
-        shared_preload_libraries = [ "vchord.so" ];
-        search_path = "\"$user\", public, vectors";
-      };
 
   };
 
-  services.immich = {
-    enable = true;
-    database.enable = false;
-    port = 2283;
+  networking.firewall = {
+    allowedTCPPorts = [ 8082 5055 ]; # traccar manager and client thing
   };
-  */
 
   system.stateVersion = "25.05";
 }

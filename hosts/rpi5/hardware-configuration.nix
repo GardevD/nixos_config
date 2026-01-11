@@ -25,6 +25,11 @@
       fsType = "zfs";
       options = [ "noatime" ];
     };
+    "/vault/immich"  = {
+      device = "vault/immich";
+      fsType = "zfs";
+      options = [ "noatime" ];
+    };
     "/boot/firmware" = {
       device = "/dev/disk/by-uuid/FA91-73AD";
       fsType = "vfat";

@@ -9,6 +9,7 @@
   home-manager.users.dani = {
     imports = [ 
       ../../../users/dani/homeManagerModules/impermanence.nix
+      ../../../users/dani/homeManagerModules/gnome.nix
       ../../../users/dani/homeManagerModules/hyprland.nix
     ];
     home.persistence."/persistence/home" = {

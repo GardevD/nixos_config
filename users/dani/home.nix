@@ -7,7 +7,6 @@
     ./homeManagerModules/git.nix
     ./homeManagerModules/zoxide.nix
     ./homeManagerModules/eza.nix
-    ./homeManagerModules/gnome.nix
     inputs.nixCats-lazyVim.homeModules.default
     # inputs.impermanence.homeManagerModules.impermanence
   ];
