@@ -12,7 +12,7 @@
       ../../../users/dani/homeManagerModules/gnome.nix
       ../../../users/dani/homeManagerModules/hyprland.nix
     ];
-    home.persistence."/persistence/home" = {
+    home.persistence."/persistence" = {
       directories = [
         "ctf"
         "Documents"

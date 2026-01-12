@@ -1,7 +1,7 @@
 {pkgs, inputs, ...}:
 {
 
-  home.persistence."/persistence/home" = {
+  home.persistence."/persistence" = {
     directories = [
       ".gnupg"
       ".ssh"
