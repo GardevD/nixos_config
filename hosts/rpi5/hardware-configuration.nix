@@ -1,4 +1,8 @@
 { ... }: {
+  imports = [
+    ../nixosModules/zfs.nix
+  ];
+
   networking.hostId = "0b8c8ce9";
   fileSystems = {
    "/" = {
@@ -47,8 +51,4 @@
   [
       { device = "/dev/disk/by-uuid/9e904e0c-cd40-4103-9b9c-5bbf541e6321"; }
   ];
-
-  boot.supportedFilesystems = [ "zfs" ];
-  boot.initrd.supportedFilesystems = [ "zfs" ];
-  boot.zfs.forceImportRoot = true;
 }
