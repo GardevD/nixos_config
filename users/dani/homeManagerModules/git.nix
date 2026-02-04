@@ -2,7 +2,9 @@
 {
   programs.git = {
     enable = true;
-    userName = "0rangeBlaze";
-    userEmail = "gardevdaniel@gmail.com";
+    settings = {
+      user.name = "0rangeBlaze";
+      user.email = "gardevdaniel@gmail.com";
+    };
   };
 }

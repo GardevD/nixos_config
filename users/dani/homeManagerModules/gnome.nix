@@ -14,5 +14,8 @@ with lib.hm.gvariant;
       # don't show welcome screen
       welcome-dialog-last-shown-version = "40.1";
     };
+    "org/gnome/settings-daemon/plugins/housekeeping" = {
+      donation-reminder-enabled = false;
+    };
   };
 }

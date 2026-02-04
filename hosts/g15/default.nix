@@ -10,6 +10,7 @@ flake-overlays:
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../nixosModules/common.nix
+      ../nixosModules/gnome.nix
       ../nixosModules/impermanence.nix
       ./users
      #inputs.home-manager.nixosModules.default
@@ -41,10 +42,6 @@ flake-overlays:
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-  services.gnome.gnome-initial-setup.enable = false;
 
   #hyperland
   programs.hyprland = {
