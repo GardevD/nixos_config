@@ -1,4 +1,4 @@
-{...}:
+{lib, ...}:
 {
   services.hypridle = {
     enable = true;
@@ -22,4 +22,5 @@
       ];
     };
   };
+  systemd.user.services.hypridle.Unit.ConditionEnvironment = lib.mkForce "HYPRLAND_INSTANCE_SIGNATURE"; # tries to run on gnome-wayland
 }

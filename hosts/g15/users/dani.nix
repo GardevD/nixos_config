@@ -31,6 +31,7 @@
         ".local/share/Anki2"
         ".local/share/Steam"
         ".local/share/Terraria"
+        ".local/share/keyrings" # keys so that secrets persisted are actually useable
         ".config/Code"
         ".config/discord"
         ".config/vivaldi"

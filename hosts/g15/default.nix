@@ -64,7 +64,6 @@ flake-overlays:
 
   # for wayland to enable screen sharing
   xdg.portal.enable = true;
-  #xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
   # chinese IME
   i18n.inputMethod = {
@@ -102,7 +101,6 @@ flake-overlays:
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-  boot.supportedFilesystems = [ "zfs" ];
 
 
   virtualisation.docker = {

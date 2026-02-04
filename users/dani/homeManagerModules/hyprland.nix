@@ -8,6 +8,9 @@
   
   wayland.windowManager.hyprland = {
     enable = true;
+    package = null;
+    portalPackage = null;
+
     plugins = []; # to do look into plugins
 
     settings = {

@@ -1,4 +1,4 @@
-{...}:
+{lib, ...}:
 {
   services.hyprpaper = {
     enable = true;
@@ -14,4 +14,5 @@
       ];
     };
   };
+  systemd.user.services.hyprpaper.Unit.ConditionEnvironment = lib.mkForce "HYPRLAND_INSTANCE_SIGNATURE"; # originally it is set to "WAYLAND_DISPLAY"", but then it also tries to run on gnome-wayland
 }
