@@ -28,6 +28,10 @@
   virtualisation.docker.enable = true;
 
   time.timeZone = "Europe/Budapest";
+
+  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+  sops.defaultSopsFile = ./secrets/rpi5.yaml;
+  sops.secrets.email_pass = { };
   /*
   users.groups.media = {};
   services.jellyseerr = {

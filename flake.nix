@@ -20,6 +20,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     impermanence.url = "github:nix-community/impermanence";
     factorioSpaceAge.url = "github:priegger/nixpkgs/update-factorio";
     factorioSpaceAge.flake = false;
@@ -38,7 +43,7 @@
     ];
   };
 
-  outputs = { self, nixpkgs, nix-matlab, home-manager, nixvim, impermanence, factorioSpaceAge, nixos-raspberrypi, ... }@inputs:
+  outputs = { self, nixpkgs, nix-matlab, home-manager, nixvim, impermanence, factorioSpaceAge, nixos-raspberrypi, sops-nix, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -64,6 +69,8 @@
 
               #home-manager.backupFileExtension = "bak";
             }
+
+            sops-nix.nixosModules.sops
 
             #nixvim.nixosModules.nixvim
           ];

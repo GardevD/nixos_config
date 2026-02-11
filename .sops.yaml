@@ -1,0 +1,9 @@
+keys:
+  - &dani_g15 age15t8f0ghgtagmur5upvz3hpkql3y498trpvg6jpcrqrmmzk224gms8rkfml
+  - &rpi5 age1wumu5ylkdzkxn0t82f0u04lvfjq7v5xnxq69rh53tdj7sh74652q9xsqh7
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *dani_g15
+      - *rpi5
