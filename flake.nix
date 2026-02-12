@@ -88,6 +88,7 @@
               home-manager.useUserPackages = true;
             }
 
+            sops-nix.nixosModules.sops
             ./hosts/rpi5
           ];
         };

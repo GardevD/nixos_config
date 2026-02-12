@@ -7,8 +7,10 @@
     ../nixosModules/common.nix
     ../nixosModules/immich.nix
     ../nixosModules/impermanence.nix
+    ../nixosModules/msmtp.nix
     ../nixosModules/wireguard-server.nix
     ../nixosModules/ssh-server.nix
+    ../nixosModules/zed.nix
   ];
   networking.hostName = "rpi5";
 
@@ -30,7 +32,7 @@
   time.timeZone = "Europe/Budapest";
 
   sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-  sops.defaultSopsFile = ./secrets/rpi5.yaml;
+  sops.defaultSopsFile = ../../secrets/rpi5.yaml;
   sops.secrets.email_pass = { };
   /*
   users.groups.media = {};
