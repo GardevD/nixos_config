@@ -35,7 +35,7 @@
       options = [ "noatime" ];
     };
     "/boot/firmware" = {
-      device = "/dev/disk/by-uuid/FA91-73AD";
+      device = "/dev/disk/by-uuid/3ABA-FAB4";
       fsType = "vfat";
       options = [
         "noatime"
