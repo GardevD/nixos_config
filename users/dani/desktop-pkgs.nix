@@ -8,6 +8,7 @@
     keepassxc
     matlab
     krita
+    opencode
   ];
 
   programs.steam.enable = true;

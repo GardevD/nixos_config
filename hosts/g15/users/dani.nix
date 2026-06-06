@@ -31,6 +31,8 @@
         ".local/share/Anki2"
         ".local/share/Steam"
         ".local/share/Terraria"
+        ".local/share/opencode"
+        ".local/state/opencode" # not sure if needed
         ".config/Code"
         ".config/discord"
         ".config/vivaldi"

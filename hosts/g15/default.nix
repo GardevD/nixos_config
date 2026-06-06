@@ -17,6 +17,8 @@ flake-overlays:
 
     ];
 
+  # Seba's sdr
+  hardware.rtl-sdr.enable = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -116,12 +118,10 @@ flake-overlays:
 
 
 
-  /*
   virtualisation.virtualbox.host.enable = true;
   virtualisation.virtualbox.guest.enable = true;
   nixpkgs.config.virtualbox.host.enableExtensionPack = true;
   users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
-  */
 
 
   # List packages installed in system profile. To search, run:
